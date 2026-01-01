@@ -8,9 +8,18 @@ spring:
      - Path=/api/products/**
      filters:
      - StripPrefix=2
+     - name: SampleCookie
+       args:
+        message: HelloWorld
+        name: users
+        value: German
    - id: msvc-items
      uri: lb://msvc-items
      predicates:
      - Path=/api/items/**
      filters:
      - StripPrefix=2
+     - AddRequestHeader=token-request, 123456
+     - AddResponseHeader=token-response, 654321
+     - AddRequestParameter=name, German
+     - SetResponseHeader=Content-Type, text/plain
