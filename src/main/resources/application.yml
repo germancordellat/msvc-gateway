@@ -41,42 +41,44 @@ spring:
             client-name: client-app
  cloud:
   gateway:
-   routes:
-   - id: msvc-oauth
-     uri: lb://msvc-oauth
-     predicates:
-     - Path=/api/security/**
-     filters:
-     - StripPrefix=2
-   - id: msvc-users
-     uri: lb://msvc-users
-     predicates:
-     - Path=/api/users/** 
-     filters:
-     - StripPrefix=2
-   - id: msvc-products
-     uri: lb://msvc-products
-     predicates:
-     - Path=/api/products/**
-    #  - Header=token, 123456
-    #  - Method=GET, POST
-    #  - Query=color, green
-    #  - Cookie=color, blue
-     filters:
-     - StripPrefix=2
-     - CircuitBreaker=products
-     - name: SampleCookie
-       args:
-        message: HelloWorld
-        name: users
-        value: German
-   - id: msvc-items
-     uri: lb://msvc-items
-     predicates:
-     - Path=/api/items/**
-     filters:
-     - StripPrefix=2
-     - AddRequestHeader=token-request, 123456
-     - AddResponseHeader=token-response, 654321
-     - AddRequestParameter=name, German
-     - SetResponseHeader=Content-Type, text/plain
+    server:
+      webmvc:
+        routes:
+        - id: msvc-oauth
+          uri: lb://msvc-oauth
+          predicates:
+          - Path=/api/security/**
+          filters:
+          - StripPrefix=2
+        - id: msvc-users
+          uri: lb://msvc-users
+          predicates:
+          - Path=/api/users/** 
+          filters:
+          - StripPrefix=2
+        - id: msvc-products
+          uri: lb://msvc-products
+          predicates:
+          - Path=/api/products/**
+          #  - Header=token, 123456
+          #  - Method=GET, POST
+          #  - Query=color, green
+          #  - Cookie=color, blue
+          filters:
+          - StripPrefix=2
+          - CircuitBreaker=products
+          # - name: SampleCookie
+          #   args:
+          #     message: HelloWorld
+          #     name: users
+          #     value: German
+        - id: msvc-items
+          uri: lb://msvc-items
+          predicates:
+          - Path=/api/items/**
+          filters:
+          - StripPrefix=2
+          - AddRequestHeader=token-request, 123456
+          - AddResponseHeader=token-response, 654321
+          - AddRequestParameter=name, German
+          - SetResponseHeader=Content-Type, text/plain
