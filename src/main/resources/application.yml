@@ -56,17 +56,17 @@ spring:
           - Path=/api/users/** 
           filters:
           - StripPrefix=2
-        - id: msvc-products
-          uri: lb://msvc-products
-          predicates:
-          - Path=/api/products/**
+        # - id: msvc-products
+        #   uri: lb://msvc-products
+        #   predicates:
+        #   - Path=/api/products/**
           #  - Header=token, 123456
           #  - Method=GET, POST
           #  - Query=color, green
           #  - Cookie=color, blue
-          filters:
-          - StripPrefix=2
-          - CircuitBreaker=products
+          # filters:
+          # - StripPrefix=2
+          # - CircuitBreaker=products
           # - name: SampleCookie
           #   args:
           #     message: HelloWorld
@@ -78,7 +78,7 @@ spring:
           - Path=/api/items/**
           filters:
           - StripPrefix=2
-          - AddRequestHeader=token-request, 123456
-          - AddResponseHeader=token-response, 654321
-          - AddRequestParameter=name, German
-          - SetResponseHeader=Content-Type, text/plain
+          # - AddRequestHeader=token-request, 123456
+          # - AddResponseHeader=token-response, 654321
+          # - AddRequestParameter=name, German
+          # - SetResponseHeader=Content-Type, text/plain
