@@ -19,6 +19,26 @@ resilience4j:
       products:
         base-config: defecto
 spring:
+ security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:9100
+      client:
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:9100
+        registration:
+          client-app:
+            provider: spring
+            client-id: gateway-app
+            client-secret: 123456
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8090/authorized"
+            scope:
+            - openid
+            - profile
+            client-name: client-app
  cloud:
   gateway:
    routes:
